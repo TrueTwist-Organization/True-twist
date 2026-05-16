@@ -1,0 +1,14 @@
+---
+description: Animated cards stack — reference prompt when editing stack primitives or demos
+globs:
+  - "**/animated-cards-stack.tsx"
+  - "**/testimonials-stack-showcase.tsx"
+  - "**/demo.tsx"
+  - "**/blocks/animated-cards-stack.ts"
+---
+
+When changing the scroll-driven **card stack** primitives or block demos, open and follow the verbatim spec:
+
+`docs/client-reviews-animated-cards-prompt.txt`
+
+It lists shadcn/Tailwind/TS expectations, `components/ui` paths, `motion` + `cva` + Avatar dependencies, the reference `animated-cards-stack` / `demo` source, globals extension note, and integration steps.
