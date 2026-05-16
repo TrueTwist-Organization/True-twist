@@ -30,10 +30,13 @@ export const ThreeDHelixPortfolio = ({ projects }: ThreeDHelixPortfolioProps) =>
     const cards = gsap.utils.toArray<HTMLElement>(".helix-card");
     const totalCards = cards.length;
 
-    // Helix configuration - Ultra-compact and focused
-    const radius = 550;
-    const heightStep = 180; // Even tighter vertical gap
-    const angleStep = (Math.PI * 2) / 4.2; // Denser spiral
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth < 1024;
+
+    // Helix configuration - Responsive
+    const radius = isMobile ? 320 : isTablet ? 450 : 550;
+    const heightStep = isMobile ? 140 : 180; 
+    const angleStep = (Math.PI * 2) / (isMobile ? 3 : 4.2);
 
     // Initial positioning in 3D space
     cards.forEach((card, i) => {
@@ -135,7 +138,7 @@ export const ThreeDHelixPortfolio = ({ projects }: ThreeDHelixPortfolioProps) =>
           {projects.map((project, i) => (
             <div
               key={project.id}
-              className="helix-card absolute w-[340px] h-[460px] cursor-pointer"
+              className="helix-card absolute w-[280px] sm:w-[340px] h-[380px] sm:h-[460px] cursor-pointer"
               onClick={() => setSelectedProject(project)}
               style={{ transformStyle: "preserve-3d", backfaceVisibility: "hidden" }}
             >

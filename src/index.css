@@ -331,3 +331,15 @@ textarea::placeholder {
 .app-main-bg {
   background-color: var(--bg-deep);
 }
+/* Global Mobile Fixes for Headings */
+@media (max-width: 768px) {
+  h1, h2, h3 {
+    line-height: 1.4 !important;
+    letter-spacing: normal !important;
+  }
+  
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}

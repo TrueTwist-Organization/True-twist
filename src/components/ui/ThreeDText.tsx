@@ -69,7 +69,7 @@ export const ThreeDText: React.FC<ThreeDTextProps> = ({
         }}
         className="relative"
       >
-        <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white">
+        <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold leading-[1.4] md:leading-tight tracking-tight text-white">
           {words.map((word, wordIndex) => {
             const cleanWord = word.replace(/[?,.!]/g, "");
             const isHighlighted = highlightWords.some((hw) =>

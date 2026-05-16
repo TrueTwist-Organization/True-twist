@@ -51,7 +51,7 @@ export const AnimatedHeading = ({ text, highlightText, className = "", delay = 0
           <span 
             key={index} 
             className={isHighlight ? "highlight" : ""}
-            style={{ display: "inline-block", whiteSpace: "nowrap", marginRight: "0.25em" }}
+            style={{ display: "inline-block", marginRight: "0.25em" }}
           >
             {word.split("").map((char, charIndex) => (
               <motion.span key={charIndex} variants={child} style={{ display: "inline-block" }}>

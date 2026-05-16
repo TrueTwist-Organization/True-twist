@@ -227,22 +227,32 @@ export function ParticleTextEffect({ words = ["TRUETWIST"], onComplete }) {
     offscreen.height = canvas.height;
     const ctx2 = offscreen.getContext("2d");
 
-    const fontSize = Math.max(16, Math.round(canvas.width * 0.022));
-    ctx2.font = `400 ${fontSize}px 'Inter', 'Outfit', sans-serif`;
+    const isMobile = canvas.width < 768;
+    const fontSize = isMobile ? 22 : Math.max(16, Math.round(canvas.width * 0.022));
+    ctx2.font = `700 ${fontSize}px 'Inter', 'Outfit', sans-serif`;
     ctx2.textAlign = "center";
     ctx2.textBaseline = "middle";
-    ctx2.letterSpacing = "0.45em";
+    ctx2.letterSpacing = isMobile ? "0.2em" : "0.45em";
     ctx2.fillStyle = "#ffffff";
 
-    // Position text at ~68% — closer to logo to reduce gap
+    // Multi-line support for mobile
     const textY = canvas.height * 0.68;
-    const text = "WHERE IDEAS MEET THEIR TRUETWIST";
-    ctx2.fillText(text, canvas.width / 2, textY);
+    const lines = isMobile 
+      ? ["WHERE IDEAS", "MEET THEIR", "TRUETWIST"] 
+      : ["WHERE IDEAS MEET THEIR TRUETWIST"];
 
-    // Draw thin divider lines above and below text (tighter gap)
-    const textWidth = Math.min(ctx2.measureText(text).width + 40, canvas.width * 0.6);
-    ctx2.fillRect(canvas.width / 2 - textWidth / 2, textY - fontSize - 5, textWidth, 1);
-    ctx2.fillRect(canvas.width / 2 - textWidth / 2, textY + fontSize + 5, textWidth, 1);
+    lines.forEach((line, i) => {
+      const lineY = isMobile ? textY + (i * fontSize * 1.8) : textY;
+      ctx2.fillText(line, canvas.width / 2, lineY);
+    });
+
+    if (!isMobile) {
+      // Draw thin divider lines only on desktop for a cleaner mobile look
+      const text = "WHERE IDEAS MEET THEIR TRUETWIST";
+      const textWidth = Math.min(ctx2.measureText(text).width + 40, canvas.width * 0.6);
+      ctx2.fillRect(canvas.width / 2 - textWidth / 2, textY - fontSize - 5, textWidth, 1);
+      ctx2.fillRect(canvas.width / 2 - textWidth / 2, textY + fontSize + 5, textWidth, 1);
+    }
 
     const imageData = ctx2.getImageData(0, 0, canvas.width, canvas.height);
     const pixels = imageData.data;
