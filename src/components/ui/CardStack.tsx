@@ -176,7 +176,7 @@ export function CardStack<T extends CardStackItem>({
     >
       <div
         className="relative w-full"
-        style={{ height: Math.max(380, cardHeight + 80) }}
+        style={{ height: Math.max(window.innerWidth <= 768 ? 250 : 380, cardHeight + (window.innerWidth <= 768 ? 40 : 80)) }}
         tabIndex={0}
         onKeyDown={onKeyDown}
         role="region"
@@ -191,43 +191,6 @@ export function CardStack<T extends CardStackItem>({
           className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto h-40 w-[76%] rounded-full bg-black/40 blur-3xl"
           aria-hidden
         />
-
-        {len > 1 && showNavButtons ? (
-          <>
-            <button
-              type="button"
-              onClick={prev}
-              disabled={!canGoPrev}
-              className={cn(
-                'absolute left-1 top-1/2 z-[130] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full',
-                'border border-white/15 bg-black/55 text-white shadow-lg backdrop-blur-sm transition',
-                'hover:border-orange-500/50 hover:bg-black/70 hover:text-orange-400',
-                'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500',
-                'disabled:pointer-events-none disabled:opacity-35',
-                'sm:left-3 md:left-6',
-              )}
-              aria-label="Previous service"
-            >
-              <ChevronLeft className="h-6 w-6" aria-hidden />
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              disabled={!canGoNext}
-              className={cn(
-                'absolute right-1 top-1/2 z-[130] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full',
-                'border border-white/15 bg-black/55 text-white shadow-lg backdrop-blur-sm transition',
-                'hover:border-orange-500/50 hover:bg-black/70 hover:text-orange-400',
-                'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500',
-                'disabled:pointer-events-none disabled:opacity-35',
-                'sm:right-3 md:right-6',
-              )}
-              aria-label="Next service"
-            >
-              <ChevronRight className="h-6 w-6" aria-hidden />
-            </button>
-          </>
-        ) : null}
 
         <div
           className="absolute inset-0 flex items-end justify-center"
@@ -332,6 +295,63 @@ export function CardStack<T extends CardStackItem>({
             })}
           </AnimatePresence>
         </div>
+
+        {len > 1 && showNavButtons ? (
+          <>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                prev()
+              }}
+              disabled={!canGoPrev}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: typeof window !== 'undefined' && window.innerWidth <= 768 ? '8px' : 'calc(50% - 250px)',
+                transform: 'translateY(-50%)',
+                zIndex: 9999,
+                pointerEvents: 'auto',
+              }}
+              className={cn(
+                'flex h-11 w-11 items-center justify-center rounded-full',
+                'border border-white/15 bg-black/75 text-white shadow-lg backdrop-blur-sm transition',
+                'hover:border-orange-500 hover:bg-black/90 hover:text-orange-500 hover:scale-115 active:scale-95',
+                'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500',
+                'disabled:pointer-events-none disabled:opacity-35',
+              )}
+              aria-label="Previous service"
+            >
+              <ChevronLeft className="h-6 w-6" aria-hidden />
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation()
+                next()
+              }}
+              disabled={!canGoNext}
+              style={{
+                position: 'absolute',
+                top: '50%',
+                right: typeof window !== 'undefined' && window.innerWidth <= 768 ? '8px' : 'calc(50% - 250px)',
+                transform: 'translateY(-50%)',
+                zIndex: 9999,
+                pointerEvents: 'auto',
+              }}
+              className={cn(
+                'flex h-11 w-11 items-center justify-center rounded-full',
+                'border border-white/15 bg-black/75 text-white shadow-lg backdrop-blur-sm transition',
+                'hover:border-orange-500 hover:bg-black/90 hover:text-orange-500 hover:scale-115 active:scale-95',
+                'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500',
+                'disabled:pointer-events-none disabled:opacity-35',
+              )}
+              aria-label="Next service"
+            >
+              <ChevronRight className="h-6 w-6" aria-hidden />
+            </button>
+          </>
+        ) : null}
       </div>
 
       {showDots ? (

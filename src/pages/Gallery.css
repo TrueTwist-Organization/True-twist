@@ -1,5 +1,18 @@
+html:has(.gallery-main),
+html:has(.gallery-main) body {
+  overflow: visible !important;
+  overflow-x: visible !important;
+}
+
 .gallery-page {
   background-color: transparent;
+}
+
+.gallery-main section,
+.gallery-main footer {
+  min-height: auto !important;
+  display: block !important;
+  scroll-snap-align: none !important;
 }
 
 .page-header {
@@ -119,7 +132,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
-  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
 @media (max-width: 768px) {

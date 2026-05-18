@@ -1,6 +1,6 @@
 /* Blog Page Styling */
 .blog-page {
-  background-color: var(--text-on-brand);
+  background-color: var(--bg-deep);
 }
 
 .ai-generator-promo {
@@ -10,7 +10,7 @@
 }
 
 .ai-banner {
-  background-color: var(--text-on-brand);
+  background-color: var(--bg-white);
   padding: 20px 30px;
   border-radius: 8px;
   display: flex;
@@ -74,7 +74,7 @@
 }
 
 .post-category {
-  background-color: var(--text-on-brand);
+  background-color: var(--bg-deep);
   color: var(--accent-primary);
   padding: 4px 10px;
   border-radius: 4px;
@@ -82,7 +82,7 @@
   font-size: 0.85rem;
   text-transform: uppercase;
   border: 1px solid rgba(var(--rgb-primary), 0.15);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .post-details {
@@ -121,7 +121,7 @@
 
 .post-footer {
   padding: 20px 30px;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(255,255,255,0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -245,7 +245,9 @@
 .search-box input {
   flex: 1;
   padding: 10px 15px;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
   border-radius: 4px 0 0 4px;
   outline: none;
 }
@@ -356,7 +358,9 @@
 .subscribe-form input {
   width: 100%;
   padding: 12px;
-  border: 1px solid rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.1);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
   border-radius: 4px;
   margin-bottom: 15px;
   outline: none;

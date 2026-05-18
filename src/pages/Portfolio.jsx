@@ -34,8 +34,8 @@ const Portfolio = () => {
     }
   }, []);
 
-  const filteredProjects = filter === 'All' 
-    ? projects 
+  const filteredProjects = filter === 'All'
+    ? projects
     : projects.filter(p => p.category === filter);
 
   return (
@@ -54,7 +54,7 @@ const Portfolio = () => {
               Partner <span className="highlight">Testimonials</span>
             </h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
               {
@@ -68,8 +68,8 @@ const Portfolio = () => {
                 text: "The web infrastructure delivered by True Twist is top-notch. Our platform speed improved by 60%, and the user feedback has been overwhelming."
               }
             ].map((client, i) => (
-              <motion.div 
-                key={i} 
+              <motion.div
+                key={i}
                 initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -80,7 +80,7 @@ const Portfolio = () => {
                   <Star size={80} className="text-orange-500" />
                 </div>
                 <div className="stars flex gap-1 mb-8">
-                  {[1,2,3,4,5].map(s => <Star key={s} size={18} className="text-orange-500 fill-orange-500" />)}
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={18} className="text-orange-500 fill-orange-500" />)}
                 </div>
                 <p className="text-stone-200 text-xl italic leading-relaxed mb-10 relative z-10">"{client.text}"</p>
                 <div className="flex items-center gap-5">

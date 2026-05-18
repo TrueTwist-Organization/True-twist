@@ -22,7 +22,8 @@
   transition: var(--transition-smooth);
 }
 
-.filter-btn:hover, .filter-btn.active {
+.filter-btn:hover,
+.filter-btn.active {
   background: var(--accent-primary);
   color: var(--text-on-brand);
   border-color: var(--accent-primary);
@@ -46,8 +47,8 @@
   backdrop-filter: blur(10px);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  border: 1px solid rgba(var(--rgb-primary),0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--rgb-primary), 0.05);
   transition: var(--transition-smooth);
 }
 
@@ -151,8 +152,8 @@
   backdrop-filter: blur(10px);
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  border: 1px solid rgba(var(--rgb-primary),0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(var(--rgb-primary), 0.05);
   position: relative;
 }
 
@@ -162,7 +163,9 @@
   margin-bottom: 20px;
 }
 
-.fill-teal { fill: var(--accent-primary); }
+.fill-teal {
+  fill: var(--accent-primary);
+}
 
 .testim-card p {
   font-size: 1.1rem;
@@ -200,7 +203,7 @@
   .projects-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .testimonials-grid {
     grid-template-columns: 1fr;
   }

@@ -54,7 +54,7 @@ const AIChatbot = () => {
     
     // 1. Basic Greetings & Identity
     if (query.match(/\b(hi|hello|hey|greetings|wassup|yo)\b/)) {
-      return "Greetings! I am the True Twist AI. I'm synchronized and ready to discuss Software Development, AI integrations, or our Cloud architecture. How can I facilitate your project today?";
+      return "Greetings! I am the True Twist AI. I'm synchronized and ready to discuss our 3D Animated Websites, AI Short Films, or Marketing Automation. How can I facilitate your project today?";
     }
 
     if (query.includes('who are you') || query.includes('what are you') || query.includes('your name')) {
@@ -67,7 +67,7 @@ const AIChatbot = () => {
     
     // 2. Services & Capabilities
     if (query.includes('service') || query.includes('what do you do') || query.includes('work') || query.includes('capabilities')) {
-      return "True Twist operates at the intersection of design and engineering. We provide: \n• Custom Software Development\n• AI & Machine Learning Integrations\n• Enterprise Web & Mobile Apps\n• Cloud Infrastructure & DevOps\nWhich of these would you like to explore?";
+      return "True Twist operates at the intersection of design and engineering. We provide: \n• 3D Animated Website\n• AI Short Film\n• Marketing Automation\n• Website & Poster Designing\n• Video Story Marketing\nWhich of these would you like to explore?";
     }
 
     // 3. AI & Robotic Theme
@@ -131,7 +131,7 @@ const AIChatbot = () => {
     }
 
     // 11. Fallback
-    return "I've analyzed your input, but I need more context. Are you asking about our Software Development services, AI integrations, Careers, or Project Pricing? Try using the quick reply buttons!";
+    return "I've analyzed your input, but I need more context. Are you asking about our 3D Animated Websites, AI Cinema, Careers, or Project Pricing? Try using the quick reply buttons!";
   };
 
   const handleSend = (forcedInput = null) => {

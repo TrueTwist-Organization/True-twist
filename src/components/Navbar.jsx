@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServiceMenuOpen, setIsServiceMenuOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -22,17 +23,17 @@ const Navbar = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsServiceMenuOpen(false);
+    setIsMobileServicesOpen(false);
   }, [location]);
 
   const closeMenus = () => {
     setIsMobileMenuOpen(false);
     setIsServiceMenuOpen(false);
+    setIsMobileServicesOpen(false);
   };
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-
-
       {/* Main Bar */}
       <div className="main-bar">
         <div className="container main-bar-content">
@@ -51,20 +52,18 @@ const Navbar = () => {
               <div className="megamenu">
                 <div className="container megamenu-grid">
                   <div className="megamenu-column">
-                    <h4>Development</h4>
-                    <Link to="/services/software-development" onClick={closeMenus}>Software Development</Link>
-                    <Link to="/services/web-development" onClick={closeMenus}>Web Development</Link>
-                    <Link to="/services/mobile-app-development" onClick={closeMenus}>Mobile App Development</Link>
-                    <Link to="/services/cms-development" onClick={closeMenus}>CMS Development</Link>
+                    <h4>Web &amp; Design</h4>
+                    <Link to="/services/3d-animated-website" onClick={closeMenus}>3D Animated Website</Link>
+                    <Link to="/services/website-poster-designing" onClick={closeMenus}>Website &amp; Poster Designing</Link>
                   </div>
                   <div className="megamenu-column">
-                    <h4>Innovation & Cloud</h4>
-                    <Link to="/services/ai-solutions-automation" onClick={closeMenus}>AI & Automation</Link>
-                    <Link to="/services/cloud-hosting" onClick={closeMenus}>Cloud & Hosting</Link>
+                    <h4>Marketing &amp; Media</h4>
+                    <Link to="/services/marketing-automation" onClick={closeMenus}>Marketing Automation</Link>
+                    <Link to="/services/video-story-marketing" onClick={closeMenus}>Video Story Marketing</Link>
                   </div>
                   <div className="megamenu-column">
-                    <h4>Design</h4>
-                    <Link to="/services/uiux-design" onClick={closeMenus}>UI/UX Design</Link>
+                    <h4>AI &amp; Cinema</h4>
+                    <Link to="/services/ai-short-film" onClick={closeMenus}>AI Short Film</Link>
                   </div>
                   <div className="megamenu-column promo-col">
                     <div className="promo-card">
@@ -94,16 +93,48 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+      {/* Mobile Menu */}
+      <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`} data-lenis-prevent>
         <ul className="mobile-nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/services">Services</Link></li>
-          <li><Link to="/portfolio">Portfolio</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/gallery">Gallery</Link></li>
-          <li><Link to="/team">Our Team</Link></li>
-          <li><Link to="/blog">Insights</Link></li>
-          <li><Link to="/contact" className="mobile-contact-btn">Get a Quote</Link></li>
+          <li><Link to="/" onClick={closeMenus}>Home</Link></li>
+          
+          {/* Services Collapsible Accordion */}
+          <li>
+            <div 
+              className="mobile-services-toggle" 
+              onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+            >
+              <span>Services</span>
+              <ChevronDown size={20} className={`arrow-icon ${isMobileServicesOpen ? 'rotate' : ''}`} />
+            </div>
+            <div className={`mobile-submenu-wrapper ${isMobileServicesOpen ? 'open' : ''}`}>
+              <ul className="mobile-submenu">
+                <li className="submenu-category">Web &amp; Design</li>
+                <li><Link to="/services/3d-animated-website" onClick={closeMenus}>3D Animated Website</Link></li>
+                <li><Link to="/services/website-poster-designing" onClick={closeMenus}>Website &amp; Poster Designing</Link></li>
+                
+                <li className="submenu-category">Marketing &amp; Media</li>
+                <li><Link to="/services/marketing-automation" onClick={closeMenus}>Marketing Automation</Link></li>
+                <li><Link to="/services/video-story-marketing" onClick={closeMenus}>Video Story Marketing</Link></li>
+                
+                <li className="submenu-category">AI &amp; Cinema</li>
+                <li><Link to="/services/ai-short-film" onClick={closeMenus}>AI Short Film</Link></li>
+
+                <li>
+                  <Link to="/services" className="mobile-all-services-link" onClick={closeMenus}>
+                    View All Services →
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          
+          <li><Link to="/portfolio" onClick={closeMenus}>Portfolio</Link></li>
+          <li><Link to="/about" onClick={closeMenus}>About Us</Link></li>
+          <li><Link to="/gallery" onClick={closeMenus}>Gallery</Link></li>
+          <li><Link to="/team" onClick={closeMenus}>Our Team</Link></li>
+          <li><Link to="/blog" onClick={closeMenus}>Insights</Link></li>
+          <li><Link to="/contact" className="mobile-contact-btn" onClick={closeMenus}>Contact Us</Link></li>
         </ul>
       </div>
     </nav>

@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
 
 const services = [
-  { id: 1, icon: "</>", label: "Web Development", sublabel: "Development", angle: 210, dist: 220 },
-  { id: 2, icon: "📱", label: "Mobile App", sublabel: "Solutions", angle: 280, dist: 200 },
-  { id: 3, icon: "🎨", label: "UI/UX Design", sublabel: "Interfaces", angle: 340, dist: 220 },
-  { id: 4, icon: "☁️", label: "Cloud Ops", sublabel: "Infrastructure", angle: 30, dist: 205 },
-  { id: 5, icon: "🤖", label: "AI Core", sublabel: "Enhancement", angle: 100, dist: 215 },
-  { id: 6, icon: "🗄️", label: "Data Hub", sublabel: "Analytics", angle: 155, dist: 220 },
-  { id: 7, icon: "🧠", label: "Strategy", sublabel: "Consulting", angle: 245, dist: 190 },
-  { id: 8, icon: "⚡", label: "Performance", sublabel: "Optimization", angle: 60, dist: 210 },
+  { id: 1, icon: "🌐", label: "3D Animation", sublabel: "Websites", angle: 45, dist: 220 },
+  { id: 2, icon: "🎬", label: "AI Cinema", sublabel: "Short Film", angle: 115, dist: 200 },
+  { id: 3, icon: "⚙️", label: "Automation", sublabel: "Marketing", angle: 195, dist: 220 },
+  { id: 4, icon: "🎨", label: "Poster Design", sublabel: "Layouts", angle: 270, dist: 190 },
+  { id: 5, icon: "📱", label: "Video Stories", sublabel: "Viral Marketing", angle: 330, dist: 215 },
 ];
 
 const styles = `

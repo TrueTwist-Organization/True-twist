@@ -18,7 +18,6 @@ import Team from './pages/Team';
 import Gallery from './pages/Gallery';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
-import AIChatbot from './components/AIChatbot';
 import ScrollToTop from './components/ScrollToTop';
 import ThreeBackground from './components/ThreeBackground';
 import { useScrollReveal } from './hooks/useScrollReveal';
@@ -55,6 +54,7 @@ const AppContent = () => {
 
   return (
     <ReactLenis root>
+      <ScrollToTop />
       <div className="app-container">
         <ThreeBackground />
         {!isAdminPath && <Navbar />}
@@ -78,7 +78,6 @@ const AppContent = () => {
           </Routes>
         </main>
         {!isAdminPath && <Footer />}
-        {!isAdminPath && <AIChatbot />}
       </div>
     </ReactLenis>
   );
@@ -87,7 +86,6 @@ const AppContent = () => {
 function App() {
   return (
     <Router>
-      <ScrollToTop />
       <AppContent />
     </Router>
   );

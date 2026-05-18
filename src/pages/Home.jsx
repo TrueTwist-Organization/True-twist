@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, motionValue } from 'framer-motion';
-import { ArrowRight, Code, Globe, Smartphone, Layout, Cpu, Cloud, ShieldCheck, LayoutTemplate, CheckCircle2, Settings, Lock } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform, motionValue, useInView } from 'framer-motion';
+import { ArrowRight, Code, Globe, Smartphone, Layout, Cpu, Cloud, ShieldCheck, LayoutTemplate, CheckCircle2, Settings, Lock, Video, BrainCircuit, Palette } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Home.css';
 import { blogPosts as initialBlogs } from '../data/blogData';
@@ -20,6 +20,13 @@ import roboticHand from '../assets/robotic-hand.jpeg';
 import { HERO_SPLINE_SCENE } from '../constants/splineScenes';
 import { AnimatedText } from '../components/ui/animated-shiny-text';
 import { ThreeDText } from '../components/ui/ThreeDText';
+
+// Local high-fidelity generated service graphics
+import service3dWebsite from '../assets/service-3d-website.png';
+import serviceAiFilm from '../assets/service-ai-film.png';
+import serviceAutomation from '../assets/service-automation.png';
+import servicePosterDesign from '../assets/service-poster-design.png';
+import serviceVideoMarketing from '../assets/service-video-marketing.png';
 
 const REVIEWS_STORAGE_KEY = 'tt_reviews_v12';
 const DEFAULT_REVIEW_POSTER =
@@ -60,54 +67,40 @@ const StatCounter = ({ end, suffix = '', duration = 2 }) => {
 
 const services = [
   {
-    id: 'web-development',
-    title: 'Web Development',
-    text: 'Fast, responsive & SEO-friendly websites that perform.',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=800&auto=format&fit=crop',
+    id: '3d-animated-website',
+    title: '3D Animated Website',
+    text: 'Immersive, high-performance web experiences utilizing 3D animations and interactive Spline/WebGL elements.',
+    image: service3dWebsite,
     icon: <Globe size={24} />
   },
   {
-    id: 'uiux-design',
-    title: 'UI/UX Design',
-    text: 'Beautiful, intuitive designs that enhance user experience.',
-    image: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=800&auto=format&fit=crop',
-    icon: <Layout size={24} />
+    id: 'ai-short-film',
+    title: 'AI Short Film',
+    text: 'Cinematic storytelling powered by advanced Generative AI pipelines and professional post-production.',
+    image: serviceAiFilm,
+    icon: <BrainCircuit size={24} />
   },
   {
-    id: 'software-development',
-    title: 'Software Development',
-    text: 'Custom software solutions built for your unique needs.',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop',
-    icon: <Code size={24} />
-  },
-  {
-    id: 'mobile-app-development',
-    title: 'Mobile App Development',
-    text: 'Native & cross-platform apps for iOS & Android.',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop',
-    icon: <Smartphone size={24} />
-  },
-  {
-    id: 'cms-development',
-    title: 'CMS Development',
-    text: 'Powerful CMS solutions like WordPress, Shopify & more.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
-    icon: <LayoutTemplate size={24} />
-  },
-  {
-    id: 'ai-automation',
-    title: 'AI & Automation',
-    text: 'Intelligent automation to streamline your workflows.',
-    image: 'https://images.unsplash.com/photo-1677756119517-756a188d2d94?q=80&w=800&auto=format&fit=crop',
+    id: 'marketing-automation',
+    title: 'Marketing Automation',
+    text: 'Streamline your customer acquisition with intelligent email funnels, automated workflows, and CRM syncing.',
+    image: serviceAutomation,
     icon: <Cpu size={24} />
   },
   {
-    id: 'cloud-hosting',
-    title: 'Cloud & Hosting',
-    text: 'Secure, scalable cloud infrastructure & hosting.',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop',
-    icon: <Cloud size={24} />
+    id: 'website-poster-designing',
+    title: 'Website & Poster Designing',
+    text: 'Premium graphic layouts, high-converting website designs, and jaw-dropping print/digital brand posters.',
+    image: servicePosterDesign,
+    icon: <Palette size={24} />
   },
+  {
+    id: 'video-story-marketing',
+    title: 'Video Story Marketing',
+    text: 'Engaging, vertical-format video narratives and cinematic social stories tailored for maximum viral engagement.',
+    image: serviceVideoMarketing,
+    icon: <Video size={24} />
+  }
 ];
 
 const Home = () => {
@@ -164,12 +157,25 @@ const Home = () => {
     const published = reviewsRaw.filter((r) => r && r.status === 'Published');
     const seenPosters = new Set();
     return published.map((r) => {
-      let poster = r.poster || DEFAULT_REVIEW_POSTER;
+      let poster = r.poster || '';
+      // If poster is empty, invalid, or is a browser fakepath, assign premium fallback
+      if (!poster || poster === 'null' || poster === 'undefined' || poster.includes('fakepath') || (!poster.startsWith('http') && !poster.startsWith('/'))) {
+        const nameLower = (r.name || '').toLowerCase();
+        if (nameLower.includes('pooja')) {
+          poster = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop"; // Premium Indian female professional
+        } else if (nameLower.includes('kavita')) {
+          poster = "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop"; // Beautiful female portrait
+        } else {
+          poster = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop"; // Premium default portrait
+        }
+      }
+
       if (seenPosters.has(poster)) {
         const sep = poster.includes('?') ? '&' : '?';
         poster = `${poster}${sep}sig=${encodeURIComponent(String(r.id))}`;
       }
       seenPosters.add(poster);
+
       return {
         id: r.id,
         name: r.name,
@@ -206,6 +212,17 @@ const Home = () => {
       })),
     [latestBlogs],
   );
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const containerRef = React.useRef(null);
+  const isContainerInView = useInView(containerRef, { once: true, amount: 0.15 });
 
   const mouseX = motionValue(0);
   const mouseY = motionValue(0);
@@ -388,7 +405,7 @@ const Home = () => {
             </motion.div>
           </motion.div>
 
-          <div className="hero-spline-wrap" aria-label="Interactive 3D scene">
+          <div ref={containerRef} className="hero-spline-wrap" aria-label="Interactive 3D scene">
             <div className="hero-spline-rim" aria-hidden />
             <motion.div
               className="hero-robot-container"
@@ -408,8 +425,8 @@ const Home = () => {
             {/* Floating Info Panels */}
             <motion.div
               className="hero-floating-panel panel-analytics"
-              initial={{ opacity: 0, y: -300, x: -300, rotate: -720, scale: 0 }}
-              animate={{ opacity: 1, y: 0, x: 0, rotate: 0, scale: 1 }}
+              initial={{ opacity: 0, y: isMobile ? -100 : -300, x: isMobile ? -100 : -300, rotate: -720, scale: 0 }}
+              animate={isContainerInView ? { opacity: 1, y: 0, x: 0, rotate: 0, scale: isMobile ? 0.48 : 1 } : {}}
               transition={{ delay: 0.6, duration: 1.5, type: 'spring', bounce: 0.4 }}
             >
               <div className="panel-edge-dot topleft"></div>
@@ -427,8 +444,8 @@ const Home = () => {
 
             <motion.div
               className="hero-floating-panel panel-cloud"
-              initial={{ opacity: 0, y: 300, x: -300, rotate: 720, scale: 0 }}
-              animate={{ opacity: 1, y: 0, x: 0, rotate: 0, scale: 1 }}
+              initial={{ opacity: 0, y: isMobile ? 100 : 300, x: isMobile ? -100 : -300, rotate: 720, scale: 0 }}
+              animate={isContainerInView ? { opacity: 1, y: 0, x: 0, rotate: 0, scale: isMobile ? 0.48 : 1 } : {}}
               transition={{ delay: 0.8, duration: 1.5, type: 'spring', bounce: 0.4 }}
             >
               <div className="panel-edge-dot topleft"></div>
@@ -444,8 +461,8 @@ const Home = () => {
 
             <motion.div
               className="hero-floating-panel panel-automation"
-              initial={{ opacity: 0, y: 300, x: 300, rotate: -720, scale: 0 }}
-              animate={{ opacity: 1, y: 0, x: 0, rotate: 0, scale: 1 }}
+              initial={{ opacity: 0, y: isMobile ? 100 : 300, x: isMobile ? 100 : 300, rotate: -720, scale: 0 }}
+              animate={isContainerInView ? { opacity: 1, y: 0, x: 0, rotate: 0, scale: isMobile ? 0.48 : 1 } : {}}
               transition={{ delay: 1.0, duration: 1.5, type: 'spring', bounce: 0.4 }}
             >
               <div className="panel-edge-dot topleft"></div>
@@ -458,8 +475,8 @@ const Home = () => {
 
             <motion.div
               className="hero-floating-panel panel-secure"
-              initial={{ opacity: 0, y: -300, x: 300, rotate: 720, scale: 0 }}
-              animate={{ opacity: 1, y: 0, x: 0, rotate: 0, scale: 1 }}
+              initial={{ opacity: 0, y: isMobile ? -100 : -300, x: isMobile ? 100 : 300, rotate: 720, scale: 0 }}
+              animate={isContainerInView ? { opacity: 1, y: 0, x: 0, rotate: 0, scale: isMobile ? 0.48 : 1 } : {}}
               transition={{ delay: 1.2, duration: 1.5, type: 'spring', bounce: 0.4 }}
             >
               <div className="panel-edge-dot topleft"></div>
@@ -484,8 +501,8 @@ const Home = () => {
         <div className="container">
           <div className="section-header text-center mb-16">
             <p className="section-subtitle">End-to-end digital solutions tailored to your business needs.</p>
-            <AnimatedHeading 
-              text="Our Specialized Services" 
+            <AnimatedHeading
+              text="Our Specialized Services"
               highlightText="Services"
               className="text-4xl md:text-5xl font-bold text-white tracking-tight"
             />
@@ -516,8 +533,8 @@ const Home = () => {
         </div>
         <div className="container relative z-10">
           <div className="text-center mb-16">
-            <AnimatedHeading 
-              text="Meet the Innovators" 
+            <AnimatedHeading
+              text="Meet the Innovators"
               highlightText="Innovators"
               className="text-4xl md:text-6xl font-bold text-white tracking-tight"
             />
@@ -557,8 +574,8 @@ const Home = () => {
         <div className="container relative z-10">
           <div className="section-header text-center mb-16">
             <span className="badge mb-4">TESTIMONIALS</span>
-            <AnimatedHeading 
-              text="Our Strategic Solutions" 
+            <AnimatedHeading
+              text="Our Strategic Solutions"
               highlightText="Solutions"
               className="text-4xl md:text-6xl font-bold text-white tracking-tight"
             />
@@ -579,8 +596,8 @@ const Home = () => {
         <div className="container relative z-10">
           <div className="section-header text-center mb-8">
             <span className="badge mb-3">KNOWLEDGE BASE</span>
-            <AnimatedHeading 
-              text="Latest Insights" 
+            <AnimatedHeading
+              text="Latest Insights"
               highlightText="Insights"
               className="text-4xl md:text-5xl font-bold text-white tracking-tight"
             />
@@ -588,9 +605,9 @@ const Home = () => {
               Thoughts, strategies, and deep-dives on building next-gen software.
             </p>
           </div>
- 
+
           <InsightsDialogGrid items={insightItems} />
- 
+
           <div className="text-center mt-10">
             <Link to="/blog" className="btn-premium-outline">Explore Full Knowledge Base <ArrowRight size={18} className="inline ml-2" /></Link>
           </div>

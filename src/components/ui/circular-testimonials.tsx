@@ -156,7 +156,7 @@ export const CircularTestimonials = ({
   const dots = Array.from({ length: testimonialsLength });
 
   return (
-    <div style={{ width: "100%", maxWidth: "800px", margin: "0 auto", padding: "0 1rem" }}>
+    <div className="ct-outer" style={{ width: "100%", maxWidth: "800px", margin: "0 auto", padding: "0 1rem" }}>
       <div
         style={{
           display: "grid",
@@ -182,6 +182,11 @@ export const CircularTestimonials = ({
               key={testimonial.src}
               src={testimonial.src}
               alt={testimonial.name}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.onerror = null; // prevents infinite loop
+                target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop"; // Premium fallback portrait
+              }}
               style={{
                 position: "absolute",
                 top: 0,
@@ -249,9 +254,10 @@ export const CircularTestimonials = ({
           </AnimatePresence>
 
           {/* Arrow buttons + dots */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginTop: "1rem", flexWrap: "wrap" }}>
+          <div className="ct-pagination" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", marginTop: "1rem", flexWrap: "nowrap", width: "100%" }}>
             <button
               onClick={handlePrev}
+              className="ct-arrow-btn"
               onMouseEnter={() => setHoverPrev(true)}
               onMouseLeave={() => setHoverPrev(false)}
               aria-label="Previous testimonial"
@@ -270,15 +276,16 @@ export const CircularTestimonials = ({
                 flexShrink: 0,
               }}
             >
-              <FaArrowLeft size={14} color={hoverPrev ? colorArrowBg : colorArrowFg} />
+              <FaArrowLeft className="ct-arrow-icon" size={14} color={hoverPrev ? colorArrowBg : colorArrowFg} />
             </button>
 
             {/* Dot indicators */}
-            <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
+            <div className="ct-dots-container" style={{ display: "flex", gap: "0.35rem", alignItems: "center", flexShrink: 1, flexWrap: "nowrap" }}>
               {dots.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => { setActiveIndex(i); pauseAndRestart(); }}
+                  className={`ct-dot ${i === activeIndex ? "active" : ""}`}
                   aria-label={`Go to testimonial ${i + 1}`}
                   style={{
                     width: i === activeIndex ? "1.5rem" : "0.45rem",
@@ -289,6 +296,7 @@ export const CircularTestimonials = ({
                     padding: 0,
                     backgroundColor: i === activeIndex ? "#ea580c" : "rgba(255,255,255,0.25)",
                     transition: "all 0.3s ease",
+                    flexShrink: 0,
                   }}
                 />
               ))}
@@ -296,6 +304,7 @@ export const CircularTestimonials = ({
 
             <button
               onClick={handleNext}
+              className="ct-arrow-btn"
               onMouseEnter={() => setHoverNext(true)}
               onMouseLeave={() => setHoverNext(false)}
               aria-label="Next testimonial"
@@ -314,7 +323,7 @@ export const CircularTestimonials = ({
                 flexShrink: 0,
               }}
             >
-              <FaArrowRight size={14} color={hoverNext ? colorArrowBg : colorArrowFg} />
+              <FaArrowRight className="ct-arrow-icon" size={14} color={hoverNext ? colorArrowBg : colorArrowFg} />
             </button>
           </div>
         </div>
@@ -326,6 +335,33 @@ export const CircularTestimonials = ({
           .ct-grid {
             grid-template-columns: 280px 1fr !important;
             gap: 2.5rem !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .ct-outer {
+            padding: 0 0.25rem !important;
+          }
+          .ct-pagination {
+            gap: 0.35rem !important;
+          }
+          .ct-arrow-btn {
+            width: 2rem !important;
+            height: 2rem !important;
+          }
+          .ct-arrow-icon {
+            font-size: 11px !important;
+            width: 11px !important;
+            height: 11px !important;
+          }
+          .ct-dots-container {
+            gap: 0.25rem !important;
+          }
+          .ct-dot {
+            width: 0.35rem !important;
+            height: 0.35rem !important;
+          }
+          .ct-dot.active {
+            width: 1rem !important;
           }
         }
       `}</style>

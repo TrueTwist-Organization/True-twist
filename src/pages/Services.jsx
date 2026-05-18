@@ -26,10 +26,9 @@ const Services = () => {
 
   const filteredServices = servicesData.filter(service => {
     if (activeFilter === 'All Services') return true;
-    if (activeFilter === 'Development') return ['software-development', 'web-development', 'mobile-app-development', 'cms-development', 'api-development', 'blockchain-web3'].includes(service.id);
-    if (activeFilter === 'Innovation & AI') return ['ai-solutions-automation', 'ai-integration', 'iot-solutions'].includes(service.id);
-    if (activeFilter === 'Design & Strategy') return ['uiux-design', 'product-design', 'brand-identity', 'graphic-design', 'motion-graphics', 'it-consulting'].includes(service.id);
-    if (activeFilter === 'Security & Cloud') return ['cloud-hosting', 'quality-assurance', 'digital-marketing-seo'].includes(service.id);
+    if (activeFilter === 'Web & Design') return ['3d-animated-website', 'website-poster-designing'].includes(service.id);
+    if (activeFilter === 'Marketing & Media') return ['marketing-automation', 'video-story-marketing'].includes(service.id);
+    if (activeFilter === 'AI & Cinema') return ['ai-short-film'].includes(service.id);
     return true;
   });
 
@@ -59,7 +58,7 @@ const Services = () => {
       <section className="services-list-section">
         <div className="container">
           <div className="services-filter">
-             {['All Services', 'Development', 'Innovation & AI', 'Design & Strategy', 'Security & Cloud'].map(filter => (
+             {['All Services', 'Web & Design', 'Marketing & Media', 'AI & Cinema'].map(filter => (
                <button 
                  key={filter}
                  className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}

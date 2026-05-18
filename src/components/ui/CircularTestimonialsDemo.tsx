@@ -49,12 +49,26 @@ export const CircularTestimonialsDemo = () => {
   const testimonials = useMemo(() => {
     const published = rawReviews
       .filter((r: any) => r && r.status === 'Published')
-      .map((r: any) => ({
-        quote: r.text || '',
-        name: r.name || 'Anonymous',
-        designation: r.company || '',
-        src: r.poster || DEFAULT_POSTER,
-      }));
+      .map((r: any) => {
+        let src = r.poster || '';
+        // If poster is empty, invalid, or is a browser fakepath, assign premium fallback
+        if (!src || src === 'null' || src === 'undefined' || src.includes('fakepath') || (!src.startsWith('http') && !src.startsWith('/'))) {
+          const nameLower = (r.name || '').toLowerCase();
+          if (nameLower.includes('pooja')) {
+            src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop"; // Premium Indian female professional
+          } else if (nameLower.includes('kavita')) {
+            src = "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop"; // Beautiful female portrait
+          } else {
+            src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop"; // Premium default portrait
+          }
+        }
+        return {
+          quote: r.text || '',
+          name: r.name || 'Anonymous',
+          designation: r.company || '',
+          src: src,
+        };
+      });
     return published.length > 0 ? published : FALLBACK_TESTIMONIALS;
   }, [rawReviews]);
 

@@ -24,7 +24,7 @@ const ServiceDetail = () => {
     );
   }
 
-  const isSoftwareDev = id === 'software-development';
+  const isSoftwareDev = id === '3d-animated-website';
 
   return (
     <div className="service-detail-page">
@@ -195,25 +195,7 @@ const ServiceDetail = () => {
                 </div>
               </motion.div>
               
-              {id === 'software-development' && (
-                <motion.div 
-                  className="software-custom-3d mt-16"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  style={{ height: '300px', background: 'var(--bg-lilac)', borderRadius: '24px' }}
-                >
-                   <Canvas camera={{ position: [0, 0, 5] }}>
-                      <ambientLight intensity={0.5} />
-                      <Float speed={4} rotationIntensity={1} floatIntensity={1}>
-                        <mesh>
-                          <boxGeometry args={[2, 2, 2]} />
-                          <meshStandardMaterial color="#00e8ff" wireframe />
-                        </mesh>
-                      </Float>
-                      <Sparkles count={50} scale={5} size={2} speed={0.3} color="#00e8ff" />
-                   </Canvas>
-                </motion.div>
-              )}
+
             </div>
 
             <aside className="detail-sidebar">

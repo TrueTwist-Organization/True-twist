@@ -99,10 +99,10 @@
 }
 
 html {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
-  /* Prevent fixed navbar from cutting off section headers */
+  overflow-x: hidden;
 }
 
 body {
@@ -116,7 +116,7 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
-  width: 100vw;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -129,7 +129,7 @@ section,
 .latest-insights,
 footer {
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -331,15 +331,40 @@ textarea::placeholder {
 .app-main-bg {
   background-color: var(--bg-deep);
 }
+
 /* Global Mobile Fixes for Headings */
 @media (max-width: 768px) {
-  h1, h2, h3 {
+
+  h1,
+  h2,
+  h3 {
     line-height: 1.4 !important;
     letter-spacing: normal !important;
   }
-  
+
   .container {
     padding-left: 20px !important;
     padding-right: 20px !important;
+  }
+
+  .page-header {
+    padding: 110px 0 45px !important;
+  }
+
+  .page-header h1 {
+    font-size: 2.4rem !important;
+    line-height: 1.2 !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.95rem !important;
+  }
+  .header-subtitle {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
   }
 }

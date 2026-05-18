@@ -19,13 +19,11 @@ const HUB_FLATTEN = 0.9;
 
 /** 7 nodes — angles (rad from +x): matches reference layout around the cube */
 const HUB_NODE_DEFS = [
-  { key: 'software', kind: 'brackets', label: 'Software Development', angle: (7 * Math.PI) / 6 },
-  { key: 'web', kind: 'webMonitor', label: 'Web Development', angle: -Math.PI / 2 },
-  { key: 'uiux', Icon: SquareMousePointer, label: 'UI/UX Design', angle: -Math.PI / 6 },
-  { key: 'mobile', Icon: Smartphone, label: 'Mobile Development', angle: 0 },
-  { key: 'cloud', Icon: CloudCog, label: 'Cloud & Hosting', angle: Math.PI / 4 },
-  { key: 'ai', Icon: BrainCircuit, label: 'AI & Automation', angle: Math.PI / 2 },
-  { key: 'cms', Icon: LayoutDashboard, label: 'CMS Development', angle: (3 * Math.PI) / 4 },
+  { key: '3d-web', kind: 'webMonitor', label: '3D Animated Website', angle: -Math.PI / 2 },
+  { key: 'ai-film', Icon: BrainCircuit, label: 'AI Short Film', angle: Math.PI / 6 },
+  { key: 'automation', Icon: CloudCog, label: 'Marketing Automation', angle: Math.PI / 2 },
+  { key: 'design', Icon: SquareMousePointer, label: 'Website & Poster Designing', angle: (5 * Math.PI) / 6 },
+  { key: 'video', Icon: Smartphone, label: 'Video Story Marketing', angle: (7 * Math.PI) / 6 },
 ];
 
 const ORBIT_SPIN_S = 90;

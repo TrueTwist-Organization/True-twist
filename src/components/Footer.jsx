@@ -35,14 +35,11 @@ const Footer = () => {
         <div className="footer-col">
           <h4>Services</h4>
           <ul>
-            <li><Link to="/services/web-development">Web Development</Link></li>
-            <li><Link to="/services/uiux-design">UI/UX Design</Link></li>
-            <li><Link to="/services/mobile-app-development">Mobile App Development</Link></li>
-            <li><Link to="/services/software-development">Software Development</Link></li>
-            <li><Link to="/services/cms-development">CMS Development</Link></li>
-            <li><Link to="/services/ai-solutions-automation">AI &amp; Automation</Link></li>
-            <li><Link to="/services/cloud-hosting">Cloud Solutions</Link></li>
-            <li><Link to="/services/cloud-hosting">Cloud Hosting</Link></li>
+            <li><Link to="/services/3d-animated-website">3D Animated Website</Link></li>
+            <li><Link to="/services/ai-short-film">AI Short Film</Link></li>
+            <li><Link to="/services/marketing-automation">Marketing Automation</Link></li>
+            <li><Link to="/services/website-poster-designing">Website &amp; Poster Designing</Link></li>
+            <li><Link to="/services/video-story-marketing">Video Story Marketing</Link></li>
           </ul>
         </div>
 

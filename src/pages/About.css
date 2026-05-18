@@ -6,6 +6,12 @@
   overflow-x: hidden;
 }
 
+.about-page section {
+  min-height: auto !important;
+  display: block !important;
+  scroll-snap-align: none !important;
+}
+
 .about-hero {
   position: relative;
   padding: 160px 0 100px;
