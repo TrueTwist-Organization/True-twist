@@ -102,7 +102,7 @@ html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -115,7 +115,7 @@ body {
   background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
   -webkit-font-smoothing: antialiased;
 }
